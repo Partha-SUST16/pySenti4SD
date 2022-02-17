@@ -81,6 +81,7 @@ def main():
     output_path = Path(f"{Path.cwd()}/predictions")
     output_path.mkdir(parents = True, exist_ok = True )
     output_path = f"{output_path.resolve()}/{args.output}"
+    logging.info(output_path)
     classification = Classification(args.model)
     logging.info("Starting classification task")
     classification.predict(jar_csv, args.chunk_size, CoreUtils.check_jobs_number(args.jobs_number), output_path)
@@ -98,5 +99,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except OSError as e:
+        logging.error(e)
+        
     

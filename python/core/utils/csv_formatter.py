@@ -1,4 +1,6 @@
+from asyncio.log import logger
 import csv
+import sys
 from collections import OrderedDict
 
 from csv_utils import CsvUtils
@@ -9,6 +11,16 @@ class CsvFormatter():
         self.header_list = header_list
         self.header = header
         self.csv_delimiter = csv_delimiter
+        maxInt = sys.maxsize
+        while True:
+        # decrease the maxInt value by factor 10 
+        # as long as the OverflowError occurs.
+            try:
+                csv.field_size_limit(maxInt)
+                break
+            except OverflowError:
+                maxInt = int(maxInt/10)
+
     
     def get_rows(self, input_csv):
         with open(input_csv, 'r+', newline = '', encoding='utf8') as csv_file:

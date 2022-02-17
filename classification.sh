@@ -10,7 +10,7 @@ documents=false
 model="$SCRIPTDIR/Senti4SD.model"
 chunkSize=200
 jobsNumber=1
-outputFile="$SCRIPTDIR/predictions.csv"
+outputFile="predictions.csv"
 
 help(){
     echo "Usage: sh classification.sh -i input.csv [-d delimiter] [-F features] [-g] [-t] [-m model] [-c chunk_size] [-j jobs_number] [-o predictions.csv]"
@@ -62,7 +62,7 @@ while getopts "h:i:d:F:m:c:j:o:tg" OPTIONS; do
           jobsNumber=$OPTARG
           ;;
         o)
-          outputFile="$SCRIPTDIR/$OPTARG"
+          outputFile="$OPTARG"
           ;;
         \?)
           echo -e \\n"Option $OPTARG not allowed."
